@@ -1,16 +1,36 @@
 package com.example.TiaAPI.api.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Venta {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_venta")
     private int idVenta;
-    private int idVentaProducto;
-    private int idLocal;
+    @ManyToOne
+    @JoinColumn(name = "id_venta_producto")
+    private VentaProducto ventaProducto;
+    @ManyToOne
+    @JoinColumn(name = "id_local")
+    private Local local;
+    @Column(name = "total")
     private double total;
     
-    public Venta(int idVenta, int idVentaProducto, int idLocal, double total) {
+    public Venta() {
+    }
+
+    public Venta(int idVenta, Local local, VentaProducto ventaProducto, double total) {
         this.idVenta = idVenta;
-        this.idVentaProducto = idVentaProducto;
-        this.idLocal = idLocal;
+        this.local = local;
+        this.ventaProducto = ventaProducto;
         this.total = total;
     }
 
@@ -22,20 +42,20 @@ public class Venta {
         this.idVenta = idVenta;
     }
 
-    public int getIdVentaProducto() {
-        return idVentaProducto;
+    public VentaProducto getVentaProducto() {
+        return ventaProducto;
     }
 
-    public void setIdVentaProducto(int idVentaProducto) {
-        this.idVentaProducto = idVentaProducto;
+    public void setVentaProducto(VentaProducto ventaProducto) {
+        this.ventaProducto = ventaProducto;
     }
 
-    public int getIdLocal() {
-        return idLocal;
+    public Local getLocal() {
+        return local;
     }
 
-    public void setIdLocal(int idLocal) {
-        this.idLocal = idLocal;
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
     public double getTotal() {

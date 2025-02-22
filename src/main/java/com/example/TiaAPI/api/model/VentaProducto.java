@@ -1,15 +1,33 @@
 package com.example.TiaAPI.api.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class VentaProducto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_venta_producto")
     private int idVentaProducto;
-    private int idProducto;
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
+    @Column(name = "cantidad")
     private int cantidad;
 
-    public VentaProducto(int idVentaProducto, int idProducto, int cantidad) {
+    public VentaProducto(int idVentaProducto, Producto producto, int cantidad) {
         this.idVentaProducto = idVentaProducto;
-        this.idProducto = idProducto;
+        this.producto = producto;
         this.cantidad = cantidad;
+    }
+
+    public VentaProducto() {
     }
 
     public int getIdVentaProducto() {
@@ -20,12 +38,12 @@ public class VentaProducto {
         this.idVentaProducto = idVentaProducto;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public int getCantidad() {

@@ -1,5 +1,6 @@
 package com.example.TiaAPI.api.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,10 +11,16 @@ public class Local {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_local")
     private int idLocal;
+    @Column(name = "codigo_local")
     private String codigoLocal;
+    @Column(name = "direccion")
     private String direccion;
     
+    public Local() {
+    }
+
     public Local(String codigoLocal, String direccion) {
         this.codigoLocal = codigoLocal;
         this.direccion = direccion;

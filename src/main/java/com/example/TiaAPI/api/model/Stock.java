@@ -1,24 +1,36 @@
 package com.example.TiaAPI.api.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_stock")
     private int idStock;
-    private int idProducto;
-    private int idLocal;
+    @OneToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
+    @OneToOne
+    @JoinColumn(name = "id_local")
+    private Local local;
+    @Column(name = "cantidad")
     private int cantidad;
     
-    public Stock(int idProducto, int idLocal, int cantidad) {
-        this.idProducto = idProducto;
-        this.idLocal = idLocal;
+    public Stock(Producto producto, Local local, int cantidad) {
+        this.producto = producto;
+        this.local = local;
         this.cantidad = cantidad;
+    }
+
+    public Stock() {
     }
 
     public int getIdStock() {
@@ -29,20 +41,20 @@ public class Stock {
         this.idStock = idStock;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public int getIdLocal() {
-        return idLocal;
+    public Local getLocal() {
+        return local;
     }
 
-    public void setIdLocal(int idLocal) {
-        this.idLocal = idLocal;
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
     public int getCantidad() {
