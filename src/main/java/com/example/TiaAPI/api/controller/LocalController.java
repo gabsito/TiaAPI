@@ -8,6 +8,7 @@ import com.example.TiaAPI.api.repo.LocalRepo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,18 +25,40 @@ public class LocalController {
     private LocalRepo localRepo;
 
     @GetMapping("/locales")
-    public List<Local> getLocales() {
-        return localRepo.findAll();
+    public ResponseEntity<List<Local>> getLocales() {
+        List<Local> locales = localRepo.findAll();
+
+        if (locales.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(locales);
     }
 
     @GetMapping("/local/{id}")
-    public Local getLocal(@PathVariable int id) {
-        return localRepo.findById(id).get();
+    public ResponseEntity<Local> getLocal(@PathVariable int id) {
+        Local local = localRepo.findById(id).orElse(null);
+
+        if (local == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(local);
     }
 
     @PostMapping("/local")
-    public Local saveLocal(@RequestBody Local local) {
-        return localRepo.save(local);
+    public ResponseEntity<?> saveLocal(@RequestBody Local local) {
+        // verificar si el local ya existe por codigo
+        Local localExistente = localRepo.findByCodigoLocal(local.getCodigoLocal());
+
+        if (localExistente != null) {
+            String mensaje = "El local con codigo " + local.getCodigoLocal() + " ya existe";
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+
+        Local localGuardado = localRepo.save(local);
+        return ResponseEntity.ok(localGuardado);
+
     }
 
     @PutMapping("/local/{id}")

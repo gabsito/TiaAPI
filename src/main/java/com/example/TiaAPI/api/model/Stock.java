@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Stock {
@@ -15,12 +16,16 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_stock")
     private int idStock;
+
     @OneToOne
     @JoinColumn(name = "id_producto")
     private Producto producto;
+    
     @OneToOne
     @JoinColumn(name = "id_local")
     private Local local;
+    
+    @NotNull(message = "La cantidad del producto es requerida")
     @Column(name = "cantidad")
     private int cantidad;
     

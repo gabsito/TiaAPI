@@ -5,4 +5,6 @@ import com.example.TiaAPI.api.model.Producto;
 
 public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
+    Producto findByCodigoProducto(String codigo);
+
 }

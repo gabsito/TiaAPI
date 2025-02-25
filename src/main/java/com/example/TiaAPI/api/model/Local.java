@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Local {
@@ -13,8 +14,12 @@ public class Local {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_local")
     private int idLocal;
-    @Column(name = "codigo_local")
+
+    @NotNull(message = "El codigo del local es requerido")
+    @Column(name = "codigo_local", unique = true)
     private String codigoLocal;
+    
+    @NotNull(message = "La direccion del local es requerida")
     @Column(name = "direccion")
     private String direccion;
     

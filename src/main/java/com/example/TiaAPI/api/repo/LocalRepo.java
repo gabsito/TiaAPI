@@ -5,4 +5,6 @@ import com.example.TiaAPI.api.model.Local;
 
 public interface LocalRepo extends JpaRepository<Local, Integer> {
 
+    Local findByCodigoLocal(String codigoLocal);
+
 }
