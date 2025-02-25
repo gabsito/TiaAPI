@@ -25,6 +25,11 @@ public class StockRequest {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    @Override
+    public String toString() {
+        return "StockRequest [productoId=" + productoId + ", localId=" + localId + ", cantidad=" + cantidad + "]";
+    }
 
     
 

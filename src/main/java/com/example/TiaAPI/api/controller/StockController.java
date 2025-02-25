@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.TiaAPI.api.dto.StockRequest;
@@ -17,6 +19,7 @@ import com.example.TiaAPI.api.model.Stock;
 import com.example.TiaAPI.api.repo.LocalRepo;
 import com.example.TiaAPI.api.repo.ProductoRepo;
 import com.example.TiaAPI.api.repo.StockRepo;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -44,7 +47,7 @@ public class StockController {
     }
 
     @GetMapping("/stock/{id}")
-    public ResponseEntity<Stock> getStock(int id) {
+    public ResponseEntity<Stock> getStock(@PathVariable Integer id) {
         Stock stock = stockRepo.findById(id).orElse(null);
 
         if (stock == null) {
@@ -54,7 +57,7 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
-    @GetMapping("/stock")
+    @GetMapping("/stocks/local")
     public ResponseEntity<List<Stock>> getStockByStore(@RequestParam int idLocal) { 
         List<Stock> stock = stockRepo.findByLocal_idLocal(idLocal);
 
@@ -67,7 +70,7 @@ public class StockController {
     
 
     @PostMapping("/stock")
-    public ResponseEntity<?> createStock(StockRequest stockRequest) {
+    public ResponseEntity<?> createStock(@RequestBody StockRequest stockRequest) {
         Optional<Local> local = localRepo.findById(stockRequest.getLocalId());
         Optional<Producto> producto = productoRepo.findById(stockRequest.getProductoId());
         
@@ -85,6 +88,25 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
+    @PostMapping("/stock/update")
+    public ResponseEntity<?> updateStock(@RequestBody StockRequest stockRequest) {
+        Optional<Local> local = localRepo.findById(stockRequest.getLocalId());
+        Optional<Producto> producto = productoRepo.findById(stockRequest.getProductoId());
+        
+        if (!local.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Local con id: " + stockRequest.getLocalId() + " no encontrado");
+        }
+
+        if (!producto.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Producto con id: " + stockRequest.getProductoId() + " no encontrado");
+        }
+
+        Stock stock = stockRepo.findByLocal_idLocalAndProducto_idProducto(stockRequest.getLocalId(), stockRequest.getProductoId()).get(0);
+        stock.setCantidad(stock.getCantidad() + stockRequest.getCantidad());
+        stockRepo.save(stock);
+
+        return ResponseEntity.ok(stock);
+    }
 
 
 }
