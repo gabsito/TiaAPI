@@ -16,6 +16,9 @@ public class VentaProducto {
     @Column(name = "id_venta_producto")
     private int idVentaProducto;
     @ManyToOne
+    @JoinColumn(name = "id_venta")
+    private Venta venta;
+    @ManyToOne
     @JoinColumn(name = "id_producto")
     private Producto producto;
     @Column(name = "cantidad")
@@ -52,5 +55,13 @@ public class VentaProducto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 }

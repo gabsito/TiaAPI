@@ -16,9 +16,6 @@ public class Venta {
     @Column(name = "id_venta")
     private int idVenta;
     @ManyToOne
-    @JoinColumn(name = "id_venta_producto")
-    private VentaProducto ventaProducto;
-    @ManyToOne
     @JoinColumn(name = "id_local")
     private Local local;
     @Column(name = "total")
@@ -30,7 +27,6 @@ public class Venta {
     public Venta(int idVenta, Local local, VentaProducto ventaProducto, double total) {
         this.idVenta = idVenta;
         this.local = local;
-        this.ventaProducto = ventaProducto;
         this.total = total;
     }
 
@@ -40,14 +36,6 @@ public class Venta {
 
     public void setIdVenta(int idVenta) {
         this.idVenta = idVenta;
-    }
-
-    public VentaProducto getVentaProducto() {
-        return ventaProducto;
-    }
-
-    public void setVentaProducto(VentaProducto ventaProducto) {
-        this.ventaProducto = ventaProducto;
     }
 
     public Local getLocal() {
