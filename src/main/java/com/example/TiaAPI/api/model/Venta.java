@@ -1,5 +1,7 @@
 package com.example.TiaAPI.api.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Venta {
@@ -21,19 +24,19 @@ public class Venta {
     @JoinColumn(name = "id_local")
     private Local local;
 
-    @NotEmpty(message = "El total de la venta es requerido")
-    @Column(name = "total")
-    private double total;
-    
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
 
+    @NotEmpty(message = "La cantidad del producto es requerida")
+    @Column(name = "cantidad")
+    private int cantidad;
+
+    @NotNull(message = "La fecha de venta es requerida")
+    @Column(name = "fecha_venta")
+    private LocalDateTime fechaVenta;
 
     public Venta() {
-    }
-
-    public Venta(int idVenta, Local local, VentaProducto ventaProducto, double total) {
-        this.idVenta = idVenta;
-        this.local = local;
-        this.total = total;
     }
 
     public int getIdVenta() {
@@ -52,12 +55,28 @@ public class Venta {
         this.local = local;
     }
 
-    public double getTotal() {
-        return total;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public LocalDateTime getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setFechaVenta(LocalDateTime fechaVenta) {
+        this.fechaVenta = fechaVenta;
     }
 
     
