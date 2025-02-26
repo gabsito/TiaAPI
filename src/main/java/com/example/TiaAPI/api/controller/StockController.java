@@ -72,6 +72,10 @@ public class StockController {
 
     @PostMapping("/stock")
     public ResponseEntity<?> createStock(@RequestBody StockRequest stockRequest) {
+        if (stockRequest.getCantidad() < 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad no puede ser negativa");
+        }
+
         Optional<Local> local = localRepo.findById(stockRequest.getLocalId());
         Optional<Producto> producto = productoRepo.findById(stockRequest.getProductoId());
         
@@ -81,6 +85,13 @@ public class StockController {
 
         if (!producto.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Producto con id: " + stockRequest.getProductoId() + " no encontrado");
+        }
+
+        // check id the stock already exists
+        Stock stockExists = stockRepo.findByLocal_idLocalAndProducto_idProducto(stockRequest.getLocalId(), stockRequest.getProductoId()).orElse(null);
+
+        if (stockExists != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El stock ya existe, si desea actualizarlo use /stock/update");
         }
 
         Stock stock = new Stock(producto.get(), local.get(), stockRequest.getCantidad());
