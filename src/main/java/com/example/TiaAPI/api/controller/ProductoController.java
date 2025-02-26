@@ -58,6 +58,21 @@ public class ProductoController {
 
     @PostMapping("/producto")
     public ResponseEntity<?> saveProducto(@RequestBody Producto producto) {
+        // verificar si los datos ingresados no son null o vacios
+        if (producto.getCodigoProducto() == null || producto.getCodigoProducto().isEmpty()) {
+            String mensaje = "El codigo del producto es requerido";
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+
+        if (producto.getDescripcion() == null || producto.getDescripcion().isEmpty()) {
+            String mensaje = "La descripcion del producto es requerida";
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+
+        if (producto.getPrecio() <= 0) {
+            String mensaje = "El precio del producto es requerido";
+            return ResponseEntity.badRequest().body(mensaje);
+        }
         // verificar si el producto ya existe por codigo
         Producto productoExistente = productoRepo.findByCodigoProducto(producto.getCodigoProducto());
         if (productoExistente != null) {

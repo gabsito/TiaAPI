@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Producto {
@@ -15,15 +15,15 @@ public class Producto {
     @Column(name = "id_producto")
     private int idProducto;
 
-    @NotNull(message = "El codigo del producto es requerido")
+    @NotEmpty(message = "El codigo del producto es requerido")
     @Column(name = "codigo_producto", unique = true)
     private String codigoProducto;
 
-    @NotNull(message = "La descripcion del producto es requerida")
+    @NotEmpty(message = "La descripcion del producto es requerida")
     @Column(name = "descripcion")
     private String descripcion;
-    
-    @NotNull(message = "El precio del producto es requerido")
+
+    @NotEmpty(message = "El precio del producto es requerido")
     @Column(name = "precio")
     private double precio;
     

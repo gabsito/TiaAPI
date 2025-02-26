@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Venta {
@@ -21,12 +21,12 @@ public class Venta {
     @JoinColumn(name = "id_local")
     private Local local;
 
-    @NotNull(message = "El total de la venta es requerido")
+    @NotEmpty(message = "El total de la venta es requerido")
     @Column(name = "total")
     private double total;
     
 
-    
+
     public Venta() {
     }
 

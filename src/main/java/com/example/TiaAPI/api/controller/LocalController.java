@@ -48,6 +48,17 @@ public class LocalController {
 
     @PostMapping("/local")
     public ResponseEntity<?> saveLocal(@RequestBody Local local) {
+        // verificar si los datos ingresados no son null o vacios
+        if (local.getCodigoLocal() == null || local.getCodigoLocal().isEmpty()) {
+            String mensaje = "El codigo del local es requerido";
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+
+        if (local.getDireccion() == null || local.getDireccion().isEmpty()) {
+            String mensaje = "La direccion del local es requerida";
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+        
         // verificar si el local ya existe por codigo
         Local localExistente = localRepo.findByCodigoLocal(local.getCodigoLocal());
 
