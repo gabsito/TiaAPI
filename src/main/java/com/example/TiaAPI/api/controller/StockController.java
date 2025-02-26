@@ -47,11 +47,12 @@ public class StockController {
     }
 
     @GetMapping("/stock/{id}")
-    public ResponseEntity<Stock> getStock(@PathVariable Integer id) {
+    public ResponseEntity<?> getStock(@PathVariable Integer id) {
         Stock stock = stockRepo.findById(id).orElse(null);
 
         if (stock == null) {
-            return ResponseEntity.notFound().build();
+            String message = "Stock con id: " + id + " no encontrado";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
         }
 
         return ResponseEntity.ok(stock);

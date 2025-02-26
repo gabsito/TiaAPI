@@ -7,7 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Stock {
@@ -25,7 +26,8 @@ public class Stock {
     @JoinColumn(name = "id_local")
     private Local local;
     
-    @NotEmpty(message = "La cantidad del producto es requerida")
+    @NotNull
+    @PositiveOrZero
     @Column(name = "cantidad")
     private int cantidad;
     
