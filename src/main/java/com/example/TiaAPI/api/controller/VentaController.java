@@ -43,7 +43,7 @@ public class VentaController {
         return ResponseEntity.ok(ventas);
     }
 
-    @GetMapping("/venta/{id}")
+    @GetMapping("/ventas/{id}")
     public ResponseEntity<Venta> getVenta(int id) {
         Venta venta = ventaRepo.findById(id).orElse(null);
 
@@ -65,7 +65,7 @@ public class VentaController {
         return ResponseEntity.ok(ventas);
     }
 
-    @PostMapping("/venta")
+    @PostMapping("/ventas")
     public ResponseEntity<?> saveVenta(@RequestParam VentaRequest request) {
         if (request.getCantidad() <= 0) {
             String mensaje = "La cantidad vendida debe ser mayor a 0";

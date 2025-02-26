@@ -1,36 +1,23 @@
-# react-redux
 
-## Descripción
+# Create Toolpad App
 
-Este proyecto es una aplicación de ejemplo que utiliza React y Redux para gestionar el estado de la aplicación. Está diseñado para demostrar cómo integrar Redux en una aplicación React y cómo manejar el flujo de datos de manera eficiente.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-toolpad-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Instalación
+## Setup
 
-Para instalar las dependencias del proyecto, ejecuta el siguiente comando:
+Run `npx auth secret` to generate a secret and replace the value in the .env.local file with it.
 
-```bash
-npm install
-```
+Add the CLIENT_ID and CLIENT_SECRET from your OAuth provider to the .env.local file.
 
-## Uso
+## Getting Started
 
-Para iniciar la aplicación en modo de desarrollo, ejecuta:
+First, run the development server: `npm run dev`
 
-```bash
-npm run dev
-```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-La aplicación estará disponible en `http://localhost:3000`.
 
-## Estructura del Proyecto
+## Deploy on Vercel
 
-- `app/`: Contiene el código fuente de la aplicación.
-  - `(dashboard)/`: Contiene los componentes de las vistas de la aplicacion.
-    - `cursos/`: Contiene las vistas de los cursos.
-    - `estudiantes/`: Contiene las vistas de los estudiantes.
-      - `inscripciones/`: Contiene las vistas de las inscripciones.
-  - `interfaces/`: Contiene las interfaces y tipos utilizados en la aplicación.
-  - `redux/`: Contiene la store y lógica relacionada con Redux.
-    - `reducers/`: Funciones reductoras de Redux.
-- `services/`: Contiene los servicios que manejan la lógica de negocio y validaciones.
-- `styles/`: Contiene algunas variables de estilos globales.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

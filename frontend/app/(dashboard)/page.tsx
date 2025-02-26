@@ -1,15 +1,13 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
+import Link from 'next/link';
 
 export default function HomePage() {
   
 
-  return (  
-    <>
+  return (    
       <Typography>
-        Bienvenido al sistema de Tia.
-        Por favor seleccione una opción del menú.
+        Welcome to <Link href="https://mui.com/toolpad/core/introduction">Toolpad Core!</Link>
       </Typography>
-    </>  
   );
 }

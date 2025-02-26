@@ -34,7 +34,7 @@ public class ProductoController {
         return ResponseEntity.ok(productos);
     }
 
-    @GetMapping("/producto/{id}")
+    @GetMapping("/productos/{id}")
     public ResponseEntity<Producto> getProducto(@PathVariable int id) {
         Producto producto = productoRepo.findById(id).orElse(null);
 
@@ -45,7 +45,7 @@ public class ProductoController {
         return ResponseEntity.ok(producto);
     }
 
-    @GetMapping("/producto/codigo/{codigo}")
+    @GetMapping("/productos/codigo/{codigo}")
     public ResponseEntity<Producto> getProductoByCodigo(@PathVariable String codigo) {
         Producto producto = productoRepo.findByCodigoProducto(codigo);
 
@@ -56,7 +56,7 @@ public class ProductoController {
         return ResponseEntity.ok(producto);
     }
 
-    @PostMapping("/producto")
+    @PostMapping("/productos")
     public ResponseEntity<?> saveProducto(@RequestBody Producto producto) {
         // verificar si los datos ingresados no son null o vacios
         if (producto.getCodigoProducto() == null || producto.getCodigoProducto().isEmpty()) {
@@ -83,7 +83,7 @@ public class ProductoController {
         return ResponseEntity.ok(productoRepo.save(producto));
     }
 
-    @PutMapping("/producto/{id}")
+    @PutMapping("/productos/{id}")
     public ResponseEntity<Producto> updateProducto(@PathVariable int id, @RequestBody Producto producto) {
         Producto productoToUpdate = productoRepo.findById(id).get();
 

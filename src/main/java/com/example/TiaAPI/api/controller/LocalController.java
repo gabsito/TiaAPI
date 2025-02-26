@@ -35,7 +35,7 @@ public class LocalController {
         return ResponseEntity.ok(locales);
     }
 
-    @GetMapping("/local/{id}")
+    @GetMapping("/locales/{id}")
     public ResponseEntity<Local> getLocal(@PathVariable int id) {
         Local local = localRepo.findById(id).orElse(null);
 
@@ -46,7 +46,7 @@ public class LocalController {
         return ResponseEntity.ok(local);
     }
 
-    @PostMapping("/local")
+    @PostMapping("/locales")
     public ResponseEntity<?> saveLocal(@RequestBody Local local) {
         // verificar si los datos ingresados no son null o vacios
         if (local.getCodigoLocal() == null || local.getCodigoLocal().isEmpty()) {
@@ -72,7 +72,7 @@ public class LocalController {
 
     }
 
-    @PutMapping("/local/{id}")
+    @PutMapping("/locales/{id}")
     public Local updateLocal(@PathVariable int id, @RequestBody Local local) {
         Local localToUpdate = localRepo.findById(id).get();
         localToUpdate.setCodigoLocal(local.getCodigoLocal());
@@ -80,7 +80,7 @@ public class LocalController {
         return localRepo.save(localToUpdate);
     }
 
-    @DeleteMapping("/local/{id}")
+    @DeleteMapping("/locales/{id}")
     public String deleteLocal(@PathVariable int id) {
         localRepo.deleteById(id);
         return "Local eliminado con id: " + id;
