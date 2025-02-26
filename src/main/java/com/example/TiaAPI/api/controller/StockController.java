@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.TiaAPI.api.dto.StockRequest;
 import com.example.TiaAPI.api.model.Local;
@@ -20,7 +21,6 @@ import com.example.TiaAPI.api.repo.LocalRepo;
 import com.example.TiaAPI.api.repo.ProductoRepo;
 import com.example.TiaAPI.api.repo.StockRepo;
 
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
