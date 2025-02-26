@@ -1,64 +1,57 @@
 # TiaAPI
 
-## Descripción
+## Configuración y Ejecución del Proyecto
 
-TiaAPI es una API diseñada para [describir la funcionalidad principal de la API]. Este proyecto tiene como objetivo [explicar el propósito del proyecto].
+Este documento proporciona instrucciones para configurar y ejecutar el proyecto TiaAPI.
 
-## Características
+### Prerrequisitos
 
-- Característica 1: [Descripción de la característica 1]
-- Característica 2: [Descripción de la característica 2]
-- Característica 3: [Descripción de la característica 3]
+Asegúrese de tener instalados los siguientes componentes:
 
-## Requisitos
+- Java Development Kit (JDK) 17
+- Maven
+- MySQL
 
-- [Requisito 1]
-- [Requisito 2]
-- [Requisito 3]
+### Configuración de la Base de Datos
 
-## Instalación
+1. Cree una base de datos en MySQL llamada tia.
+2. Configure las variables de conexión de la base de datos en el archivo `application.properties`. Este archivo se encuentra en el directorio `src/main/resources`.
 
-1. Clona el repositorio:
-    ```bash
-    git clone https://github.com/usuario/TiaAPI.git
-    ```
-2. Navega al directorio del proyecto:
-    ```bash
-    cd TiaAPI
-    ```
-3. Instala las dependencias:
-    ```bash
-    npm install
-    ```
-
-## Uso
-
-Para iniciar el servidor, ejecuta:
-```bash
-npm start
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/nombre_de_tu_base_de_datos
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
 ```
 
-La API estará disponible en `http://localhost:3000`.
+### Ejecución del Proyecto
 
-## Endpoints
+1. Clone el repositorio del proyecto:
 
-- `GET /endpoint1`: [Descripción del endpoint 1]
-- `POST /endpoint2`: [Descripción del endpoint 2]
-- `PUT /endpoint3`: [Descripción del endpoint 3]
-- `DELETE /endpoint4`: [Descripción del endpoint 4]
+    ```sh
+    git clone https://github.com/gabsito/TiaAPI.git
+    ```
 
-## Contribuir
+2. Navegue al directorio del proyecto:
 
-1. Haz un fork del proyecto.
-2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-3. Realiza tus cambios y haz commit (`git commit -am 'Añadir nueva funcionalidad'`).
-4. Sube tus cambios (`git push origin feature/nueva-funcionalidad`).
-5. Abre un Pull Request.
+    ```sh
+    cd TiaAPI
+    ```
 
-## Licencia
+3. Compile y empaquete el proyecto usando Maven:
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+    ```sh
+    mvn clean package
+    ```
 
-## Contacto
+4. Ejecute la aplicación:
 
-Para más información, puedes contactarnos en [correo@example.com].
+    ```sh
+    java -jar target/tiaapi-0.0.1-SNAPSHOT.jar
+    ```
+
+### Notas
+
+- Asegúrese de que el servidor MySQL esté en funcionamiento antes de ejecutar la aplicación.
+- Puede ajustar las configuraciones adicionales en el archivo `application.properties` según sea necesario.
+
+¡Listo! Ahora debería poder configurar y ejecutar el proyecto TiaAPI correctamente.
