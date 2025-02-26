@@ -103,6 +103,15 @@ public class StockController {
         }
 
         Stock stock = stockRepo.findByLocal_idLocalAndProducto_idProducto(stockRequest.getLocalId(), stockRequest.getProductoId()).orElse(null);
+
+        if (stock == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stock no encontrado");
+        }
+
+        if (stock.getCantidad() + stockRequest.getCantidad() < 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay suficiente stock");
+        }
+
         stock.setCantidad(stock.getCantidad() + stockRequest.getCantidad());
         stockRepo.save(stock);
 
