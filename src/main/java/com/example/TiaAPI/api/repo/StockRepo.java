@@ -1,6 +1,7 @@
 package com.example.TiaAPI.api.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,6 +11,6 @@ public interface StockRepo extends JpaRepository<Stock, Integer> {
 
     List<Stock> findByLocal_idLocal(int idLocal);
 
-    List<Stock> findByLocal_idLocalAndProducto_idProducto(int localId, int productoId);
+    Optional<Stock> findByLocal_idLocalAndProducto_idProducto(int localId, int productoId);
 
 }

@@ -102,7 +102,7 @@ public class StockController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Producto con id: " + stockRequest.getProductoId() + " no encontrado");
         }
 
-        Stock stock = stockRepo.findByLocal_idLocalAndProducto_idProducto(stockRequest.getLocalId(), stockRequest.getProductoId()).get(0);
+        Stock stock = stockRepo.findByLocal_idLocalAndProducto_idProducto(stockRequest.getLocalId(), stockRequest.getProductoId()).orElse(null);
         stock.setCantidad(stock.getCantidad() + stockRequest.getCantidad());
         stockRepo.save(stock);
 
